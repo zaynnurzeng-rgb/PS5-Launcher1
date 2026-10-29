@@ -1,0 +1,6 @@
+{
+  "name": "SaveSync Android - Emulator & Game Save Cloud Manager",
+  "description": "Unified save manager and automatic cloud syncing dashboard for Android emulators, native Android games, save state branching, and cross-device sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
