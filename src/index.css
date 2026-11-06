@@ -59,11 +59,33 @@
   }
 }
 
+/* Pointer-tracking specular sheen */
+.liquid-glass__sheen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--lg-x, 50%) var(--lg-y, 50%),
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  mix-blend-mode: plus-lighter;
+  opacity: 0.5;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.liquid-glass:active {
+  transform: scale(0.98);
+  transition: transform 0.12s ease;
+}
+
 /* Motion-friendly: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass,
   .liquid-glass::before,
-  .liquid-glass::after {
+  .liquid-glass::after,
+  .liquid-glass__sheen {
     transition: none !important;
     animation: none !important;
   }
