@@ -76,7 +76,7 @@ export const TopNav: React.FC<TopNavProps> = ({
   };
 
   return (
-    <header className="flex items-center justify-between gap-8 px-6 py-3.5 bg-slate-950/90 backdrop-blur-md border-b border-slate-900 shrink-0 select-none z-30">
+    <header className="flex items-center justify-between gap-8 px-6 py-3.5 liquid-glass border-b border-slate-900/60 shrink-0 select-none z-30">
       {/* Zone 1: PS5 Logo & Category Tabs */}
       <div className="flex items-center gap-6">
         {/* PS5 Brand Emblem App Logo */}

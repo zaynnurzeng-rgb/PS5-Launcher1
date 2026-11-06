@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Liquid Glass (approximation of BitChord's Kyant0/backdrop pipeline)  */
+/* Web/CSS counterpart: blur + saturation + adaptive tint + specular   */
+/* rim highlight (Plus blend) + outer shadow + 0.5px hairline edge.     */
+/* True AGSL refraction/chromatic aberration is Android-only.          */
+/* ------------------------------------------------------------------ */
+:root {
+  --lg-tint: rgba(18, 18, 18, 0.40);
+  --lg-edge: rgba(255, 255, 255, 0.10);
+  --lg-specular: rgba(255, 255, 255, 0.50);
+  --lg-shadow: rgba(0, 0, 0, 0.10);
+}
+
+.liquid-glass {
+  position: relative;
+  background: var(--lg-tint);
+  backdrop-filter: blur(8px) saturate(1.5) brightness(1.05);
+  -webkit-backdrop-filter: blur(8px) saturate(1.5) brightness(1.05);
+  border: 0.5px solid var(--lg-edge);
+  box-shadow:
+    0 8px 24px var(--lg-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  border-radius: inherit;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Specular rim highlight (45deg, Plus blend) */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--lg-specular) 0%, rgba(255, 255, 255, 0) 55%);
+  mix-blend-mode: plus-lighter;
+  opacity: 0.55;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Depth / inner shadow */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Light-theme variant */
+@media (prefers-color-scheme: light) {
+  .liquid-glass {
+    --lg-tint: rgba(250, 250, 250, 0.40);
+    --lg-edge: rgba(0, 0, 0, 0.08);
+    --lg-specular: rgba(255, 255, 255, 0.70);
+    --lg-shadow: rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Motion-friendly: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass,
+  .liquid-glass::before,
+  .liquid-glass::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
