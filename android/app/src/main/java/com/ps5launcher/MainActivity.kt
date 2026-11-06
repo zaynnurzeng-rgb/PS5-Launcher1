@@ -19,7 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +32,7 @@ import com.music.bitchord.ui.components.LocalAppBackdrop
 import com.music.bitchord.ui.components.LocalLiquidGlassEnabled
 import com.music.bitchord.ui.components.liquidGlass
 import com.music.bitchord.ui.components.backdrop.backdrops.rememberLayerBackdrop
+import com.ps5launcher.ui.components.GlassBottomBar
 import com.ps5launcher.ui.model.Game
 import com.ps5launcher.ui.screens.PS5HomeScreen
 
@@ -60,6 +64,7 @@ fun PS5LauncherApp() {
         LocalLiquidGlassEnabled provides true,
         LocalAppBackdrop provides appBackdrop,
     ) {
+        var selectedTab by remember { mutableStateOf(0) }
         Column(Modifier.fillMaxSize()) {
             // Glass top bar
             val barShape = RoundedCornerShape(0.dp)
@@ -90,7 +95,13 @@ fun PS5LauncherApp() {
                     Game("4", "Ratchet & Clank", "PS5"),
                 )
             }
-            PS5HomeScreen(games = games, modifier = Modifier.fillMaxSize())
+            Box(Modifier.weight(1f)) {
+                PS5HomeScreen(games = games, modifier = Modifier.fillMaxSize())
+            }
+            GlassBottomBar(
+                selectedIndex = selectedTab,
+                onTabSelected = { selectedTab = it },
+            )
         }
     }
 }
