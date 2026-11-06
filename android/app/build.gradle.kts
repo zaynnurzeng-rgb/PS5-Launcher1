@@ -40,5 +40,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("dev.chrisbanes.haze:haze:1.0.0")
     implementation("dev.chrisbanes.haze:haze-materials:1.0.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
     debugImplementation("androidx.compose.ui:ui-tooling:1.7.5")
 }

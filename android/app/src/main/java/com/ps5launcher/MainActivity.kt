@@ -29,6 +29,8 @@ import com.music.bitchord.ui.components.LocalAppBackdrop
 import com.music.bitchord.ui.components.LocalLiquidGlassEnabled
 import com.music.bitchord.ui.components.liquidGlass
 import com.music.bitchord.ui.components.backdrop.backdrops.rememberLayerBackdrop
+import com.ps5launcher.ui.model.Game
+import com.ps5launcher.ui.screens.PS5HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,9 +82,15 @@ fun PS5LauncherApp() {
                 }
             }
             // Content
-            Box(Modifier.fillMaxSize().padding(24.dp)) {
-                Text("Liquid Glass demo (native Compose, BitChord-style)", color = Color.White)
+            val games = remember {
+                listOf(
+                    Game("1", "God of War", "PS5"),
+                    Game("2", "Spider-Man 2", "PS5"),
+                    Game("3", "Horizon Forbidden West", "PS5"),
+                    Game("4", "Ratchet & Clank", "PS5"),
+                )
             }
+            PS5HomeScreen(games = games, modifier = Modifier.fillMaxSize())
         }
     }
 }
